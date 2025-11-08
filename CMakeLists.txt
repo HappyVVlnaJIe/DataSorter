@@ -7,7 +7,7 @@ endif()
 
 project (DataSorter VERSION 1.0)
 
-add_executable (${PROJECT_NAME} main.cpp  "include/DataStorage.h" "include/DataSorter.h" "src/DataStorage.cpp")
+add_executable (${PROJECT_NAME} main.cpp  "include/DataStorage.h" "include/DataSorter.h" "src/DataStorage.cpp" "include/InputReader.h" "src/InputReader.cpp")
 
 target_include_directories(${PROJECT_NAME} PRIVATE include)
 
