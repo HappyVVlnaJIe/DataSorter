@@ -5,7 +5,7 @@ if (POLICY CMP0141)
   set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>")
 endif()
 
-project (DataSorter VERSION 1.0)
+project (DataSorter VERSION 2.0)
 
 add_executable (${PROJECT_NAME} main.cpp  "include/DataStorage.h"  "src/DataStorage.cpp" "include/InputReader.h" "src/InputReader.cpp")
 
