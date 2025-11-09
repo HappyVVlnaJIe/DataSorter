@@ -11,11 +11,14 @@ namespace DataSorters {
 		r(L"([À-ß][à-ÿ]*)[ ]([À-ß][à-ÿ]*): ([0-9]+)")
 	{
 		if (!fs::exists(file_path)) {
-			throw std::exception("Error: 'file doesn't exist'");
+			throw std::wstring(L"Error: 'file doesn't exist'");
+		}
+		if (file_path.extension() != ".txt") {
+			throw std::wstring(L"Error: 'incorrect file type'");
 		}
 		std::wifstream file(file_path);
 		if (!file.is_open()) {
-			throw std::exception("Error: 'can't open file'");
+			throw std::wstring(L"Error: 'can't open file'");
 		}
 		file.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 		std::wstring line;
@@ -28,13 +31,16 @@ namespace DataSorters {
 						this->data.push_back({ m[1] ,m[2], std::stoull(m[3]) });
 					}
 					catch (const std::invalid_argument&) {
-						std::wcout << L"Error: '" << m[3] << L"' is not a valid number" << std::endl;
+						//std::wcout << L"Error: '" << m[3] << L"' is not a valid number" << std::endl;
 					}
 					catch (const std::out_of_range&) {
-						std::wcout << L"Error: '" << m[3] << L"' is out of uint64_t range" << std::endl;
+						//std::wcout << L"Error: '" << m[3] << L"' is out of uint64_t range" << std::endl;
 					}
 				}
 			}
+		}
+		if (data.empty()) {
+			throw std::wstring(L"Error: 'empty file'");
 		}
 		create_sort_types();
 	}
@@ -46,7 +52,7 @@ namespace DataSorters {
 			}
 		}
 		else {
-			throw std::exception("Error: 'non-existent sort type'");
+			throw std::wstring(L"Error: 'non-existent sort type'");
 		}
 		output_sorted_data(sort_type);
 	}
